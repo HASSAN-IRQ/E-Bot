@@ -3032,34 +3032,6 @@ local function run(msg, matches)
 		end
  	if matches[1] == 'lock' and is_momod(msg) then
 			local target = msg.to.id
-			     if matches[2] == 'all' then
-      	local safemode ={
-        lock_group_links(msg, data, target),
-		lock_group_tag(msg, data, target),
-		lock_group_inline(msg, data, target),
-		lock_group_spam(msg, data, target),
-		lock_group_flood(msg, data, target),
-		lock_group_cmds(msg, data, target),
-		lock_group_arabic(msg, data, target),
-		lock_group_membermod(msg, data, target),
-		lock_group_rtl(msg, data, target),
-		lock_group_number(msg, data, target),
-		lock_group_tgservice(msg, data, target),
-		lock_group_sticker(msg, data, target),
-		lock_group_contacts(msg, data, target),
-		lock_group_english(msg, data, target),
-		lock_group_fwd(msg, data, target),
-		lock_group_reply(msg, data, target),
-		lock_group_join(msg, data, target),
-		lock_group_emoji(msg, data, target),
-		lock_group_username(msg, data, target),
-		lock_group_fosh(msg, data, target),
-		lock_group_media(msg, data, target),
-		lock_group_leave(msg, data, target),
-		lock_group_bots(msg, data, target),
-      	}
-      	return lock_group_all(msg, data, target), safemode
-      end
 			if matches[2] == 'links' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked link posting ")
 				return lock_group_links(msg, data, target)
@@ -3090,11 +3062,11 @@ local function run(msg, matches)
 			end
 			if matches[2] == 'number' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked arabic ")
-				return lock_group_arabic(msg, data, target)
+				return lock_group_number(msg, data, target)
 			end
 			if matches[2] == 'member' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked member ")
-				return lock_group_membermod(msg, data, target)
+				return lock_group_member(msg, data, target)
 			end		    
 			if matches[2]:lower() == 'rtl' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked rtl chars. in names")
@@ -3114,7 +3086,7 @@ local function run(msg, matches)
 			end
 			if matches[2] == 'strict' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked enabled strict settings")
-				return enable_strict_rules(msg, data, target)
+				return enable_strict_strict(msg, data, target)
 			end
 			if matches[2] == 'english' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked english")
@@ -3159,34 +3131,6 @@ local function run(msg, matches)
 		end
 		if matches[1] == 'unlock' and is_momod(msg) then
 			local target = msg.to.id
-			     if matches[2] == 'all' then
-      	local dsafemode ={
-        unlock_group_links(msg, data, target),
-		unlock_group_tag(msg, data, target),
-		unlock_group_inline(msg, data, target),
-		unlock_group_spam(msg, data, target),
-		unlock_group_flood(msg, data, target),
-		unlock_group_cmds(msg, data, target),
-		unlock_group_arabic(msg, data, target),
-		unlock_group_membermod(msg, data, target),
-		unlock_group_rtl(msg, data, target),
-		unlock_group_number(msg, data, target),
-		unlock_group_tgservice(msg, data, target),
-		unlock_group_sticker(msg, data, target),
-		unlock_group_contacts(msg, data, target),
-		unlock_group_english(msg, data, target),
-		unlock_group_fwd(msg, data, target),
-		unlock_group_reply(msg, data, target),
-		unlock_group_join(msg, data, target),
-		unlock_group_emoji(msg, data, target),
-		unlock_group_username(msg, data, target),
-		unlock_group_fosh(msg, data, target),
-		unlock_group_media(msg, data, target),
-		unlock_group_leave(msg, data, target),
-		unlock_group_bots(msg, data, target),
-      	}
-      	return unlock_group_all(msg, data, target), dsafemode
-      end
 			if matches[2] == 'links' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked link posting")
 				return unlock_group_links(msg, data, target)
@@ -3310,6 +3254,58 @@ local function run(msg, matches)
 			end
 		end
 
+		
+		if matches[1] == 'mute' and is_momod(msg) then
+			local target = msg.to.id
+			if matches[2] == 'audio' then
+				return lock_group_audio(msg, data, target)
+			end
+			if matches[2] == 'photo' then
+				return lock_group_photo(msg, data, target)
+			end
+			if matches[2] == 'video' then
+				return lock_group_video(msg, data, target)
+			end
+			if matches[2] == 'gifs' then
+				return lock_group_gif(msg, data, target)
+			end
+			if matches[2] == 'documents' then
+				return lock_group_document(msg, data, target)
+			end
+			if matches[2] == 'text' then
+				return lock_group_text(msg, data, target)
+			end
+			if matches[2] == 'all' then
+				return lock_group_muteall(msg, data, target)
+			end
+		end
+		if matches[1] == 'unmute' and is_momod(msg) then
+			local target = msg.to.id
+			if matches[2] == 'audio' then
+				return unlock_group_audio(msg, data, target)
+			end
+			if matches[2] == 'photo' then
+				return unlock_group_photo(msg, data, target)
+			end
+			if matches[2] == 'video' then
+				return unlock_group_video(msg, data, target)
+			end
+			if matches[2] == 'gifs' then
+				return unlock_group_gif(msg, data, target)
+			end
+			if matches[2] == 'documents' then
+				return unlock_group_document(msg, data, target)
+			end
+			if matches[2] == 'text' then
+				return unlock_group_text(msg, data, target)
+			end
+			if matches[2] == 'all' then
+				return unlock_group_muteall(msg, data, target)
+			end
+		end
+		
+		
+		
 		if matches[1] == 'mute' and is_owner(msg) then
 			local chat_id = msg.to.id
 			if matches[2] == 'audio' then
@@ -3317,7 +3313,7 @@ local function run(msg, matches)
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return lock_group_audio(msg, data, target)
+					return
 			end
 				end
 			if matches[2] == 'photo' then
@@ -3325,7 +3321,7 @@ local function run(msg, matches)
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return lock_group_photo(msg, data, target)
+					return
 			end
 					end
 			if matches[2] == 'video' then
@@ -3333,7 +3329,7 @@ local function run(msg, matches)
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return lock_group_video(msg, data, target)
+					return
 			end
 						end
 			if matches[2] == 'gifs' then
@@ -3341,7 +3337,7 @@ local function run(msg, matches)
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return lock_group_gif(msg, data, target)
+					return
 			end
 							end
 			if matches[2] == 'documents' then
@@ -3349,7 +3345,7 @@ local function run(msg, matches)
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return lock_group_document(msg, data, target)
+					return
 			end
 								end
 			if matches[2] == 'text' then
@@ -3357,7 +3353,7 @@ local function run(msg, matches)
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return lock_group_text(msg, data, target)
+					return
 				end
 			end
 			if matches[2] == 'all' then
@@ -3365,7 +3361,7 @@ local function run(msg, matches)
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return lock_group_muteall(msg, data, target)
+					return
 				end
 			end
 		end
@@ -3376,7 +3372,7 @@ local function run(msg, matches)
 				if is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: unmute "..msg_type)
 					unmute(chat_id, msg_type)
-					return unlock_group_audio(msg, data, target)
+					return
 				end
 			end
 			if matches[2] == 'photo' then
@@ -3384,7 +3380,7 @@ local function run(msg, matches)
 				if is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: unmute "..msg_type)
 					unmute(chat_id, msg_type)
-					return unlock_group_photo(msg, data, target)
+					return
 				end
 			end
 			if matches[2] == 'video' then
@@ -3392,7 +3388,7 @@ local function run(msg, matches)
 				if is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: unmute "..msg_type)
 					unmute(chat_id, msg_type)
-					return unlock_group_video(msg, data, target)
+					return
 				end
 			end
 			if matches[2] == 'gifs' then
@@ -3400,7 +3396,7 @@ local function run(msg, matches)
 				if is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: unmute "..msg_type)
 					unmute(chat_id, msg_type)
-					return unlock_group_gif(msg, data, target)
+					return
 				end
 			end
 			if matches[2] == 'documents' then
@@ -3408,7 +3404,7 @@ local function run(msg, matches)
 				if is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: unmute "..msg_type)
 					unmute(chat_id, msg_type)
-					return unlock_group_document(msg, data, target)
+					return
 				end
 			end
 			if matches[2] == 'text' then
@@ -3416,7 +3412,7 @@ local function run(msg, matches)
 				if is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: unmute message")
 					unmute(chat_id, msg_type)
-					return unlock_group_text(msg, data, target)
+					return
 				end
 			end
 			if matches[2] == 'all' then
@@ -3424,7 +3420,7 @@ local function run(msg, matches)
 				if is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: unmute "..msg_type)
 					unmute(chat_id, msg_type)
-					return unlock_group_muteall(msg, data, target)
+					return
 				end
 			end
 		end
