@@ -1,5 +1,4 @@
---return by @blackwolf_admin 
--- channel @open_sources
+
 
 local function check_member_super_deleted(cb_extra, success, result)
 local receiver = cb_extra.receiver
@@ -28,5 +27,4 @@ channel_get_users(receiver, check_member_super_deleted,{receiver = receiver, msg
  },
 run = run,
 }
---return by @blackwolf_admin 
--- channel @open_sources
+
