@@ -3253,67 +3253,18 @@ local function run(msg, matches)
 				return unset_public_membermod(msg, data, target)
 			end
 		end
-
-		
-		if matches[1] == 'mute' and is_momod(msg) then
-			local target = msg.to.id
-			if matches[2] == 'audio' then
-				return lock_group_audio(msg, data, target)
-			end
-			if matches[2] == 'photo' then
-				return lock_group_photo(msg, data, target)
-			end
-			if matches[2] == 'video' then
-				return lock_group_video(msg, data, target)
-			end
-			if matches[2] == 'gifs' then
-				return lock_group_gif(msg, data, target)
-			end
-			if matches[2] == 'documents' then
-				return lock_group_document(msg, data, target)
-			end
-			if matches[2] == 'text' then
-				return lock_group_text(msg, data, target)
-			end
-			if matches[2] == 'all' then
-				return lock_group_muteall(msg, data, target)
-			end
-		end
-		if matches[1] == 'unmute' and is_momod(msg) then
-			local target = msg.to.id
-			if matches[2] == 'audio' then
-				return unlock_group_audio(msg, data, target)
-			end
-			if matches[2] == 'photo' then
-				return unlock_group_photo(msg, data, target)
-			end
-			if matches[2] == 'video' then
-				return unlock_group_video(msg, data, target)
-			end
-			if matches[2] == 'gifs' then
-				return unlock_group_gif(msg, data, target)
-			end
-			if matches[2] == 'documents' then
-				return unlock_group_document(msg, data, target)
-			end
-			if matches[2] == 'text' then
-				return unlock_group_text(msg, data, target)
-			end
-			if matches[2] == 'all' then
-				return unlock_group_muteall(msg, data, target)
-			end
-		end
-		
-		
 		
 		if matches[1] == 'mute' and is_owner(msg) then
+			local target = msg.to.id
 			local chat_id = msg.to.id
 			if matches[2] == 'audio' then
 			local msg_type = 'Audio'
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return
+					return lock_group_audio(msg, data, target)
+					else
+					return lock_group_audio(msg, data, target)
 			end
 				end
 			if matches[2] == 'photo' then
@@ -3321,7 +3272,9 @@ local function run(msg, matches)
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return
+					return lock_group_photo(msg, data, target)
+					else
+					return lock_group_photo(msg, data, target)
 			end
 					end
 			if matches[2] == 'video' then
@@ -3329,7 +3282,9 @@ local function run(msg, matches)
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return
+					return lock_group_video(msg, data, target)
+					else
+					return lock_group_video(msg, data, target)
 			end
 						end
 			if matches[2] == 'gifs' then
@@ -3337,7 +3292,9 @@ local function run(msg, matches)
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return
+					return lock_group_gif(msg, data, target)
+					else
+					return lock_group_gif(msg, data, target)
 			end
 							end
 			if matches[2] == 'documents' then
@@ -3345,7 +3302,9 @@ local function run(msg, matches)
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return
+					return lock_group_document(msg, data, target)
+					else
+					return lock_group_document(msg, data, target)
 			end
 								end
 			if matches[2] == 'text' then
@@ -3353,7 +3312,9 @@ local function run(msg, matches)
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return
+					return lock_group_text(msg, data, target)
+					else
+					return lock_group_text(msg, data, target)
 				end
 			end
 			if matches[2] == 'all' then
@@ -3361,18 +3322,23 @@ local function run(msg, matches)
 				if not is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: mute "..msg_type)
 					mute(chat_id, msg_type)
-					return
+					return lock_group_muteall(msg, data, target)
+					else
+					return lock_group_muteall(msg, data, target)
 				end
 			end
 		end
 		if matches[1] == 'unmute' and is_momod(msg) then
+			local target = msg.to.id
 			local chat_id = msg.to.id
 			if matches[2] == 'audio' then
 			local msg_type = 'Audio'
 				if is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: unmute "..msg_type)
 					unmute(chat_id, msg_type)
-					return
+					return unlock_group_audio(msg, data, target)
+					else
+					return unlock_group_audio(msg, data, target)
 				end
 			end
 			if matches[2] == 'photo' then
@@ -3380,7 +3346,9 @@ local function run(msg, matches)
 				if is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: unmute "..msg_type)
 					unmute(chat_id, msg_type)
-					return
+					return unlock_group_photo(msg, data, target)
+					else
+					return unlock_group_photo(msg, data, target)
 				end
 			end
 			if matches[2] == 'video' then
@@ -3388,7 +3356,9 @@ local function run(msg, matches)
 				if is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: unmute "..msg_type)
 					unmute(chat_id, msg_type)
-					return
+					return unlock_group_video(msg, data, target)
+					else
+					return unlock_group_video(msg, data, target)
 				end
 			end
 			if matches[2] == 'gifs' then
@@ -3396,7 +3366,9 @@ local function run(msg, matches)
 				if is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: unmute "..msg_type)
 					unmute(chat_id, msg_type)
-					return
+					return unlock_group_gif(msg, data, target)
+					else
+					return unlock_group_gif(msg, data, target)
 				end
 			end
 			if matches[2] == 'documents' then
@@ -3404,7 +3376,9 @@ local function run(msg, matches)
 				if is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: unmute "..msg_type)
 					unmute(chat_id, msg_type)
-					return
+					return unlock_group_document(msg, data, target)
+					else
+					return unlock_group_document(msg, data, target)
 				end
 			end
 			if matches[2] == 'text' then
@@ -3412,7 +3386,9 @@ local function run(msg, matches)
 				if is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: unmute message")
 					unmute(chat_id, msg_type)
-					return
+					return unlock_group_text(msg, data, target)
+					else
+					return unlock_group_text(msg, data, target)
 				end
 			end
 			if matches[2] == 'all' then
@@ -3420,7 +3396,9 @@ local function run(msg, matches)
 				if is_muted(chat_id, msg_type..': yes') then
 					savelog(msg.to.id, name_log.." ["..msg.from.id.."] set SuperGroup to: unmute "..msg_type)
 					unmute(chat_id, msg_type)
-					return
+					return unlock_group_muteall(msg, data, target)
+					else
+					return unlock_group_muteall(msg, data, target)
 				end
 			end
 		end
@@ -3481,7 +3459,7 @@ local function run(msg, matches)
 		end
 
 		if matches[1] == 'help' and not is_owner(msg) then
-			text = "Message /superhelp to @antispam_shield in private for SuperGroup help"
+			text = "✖دسترسی ندارید"
 			reply_msg(msg.id, text, ok_cb, false)
 		elseif matches[1] == 'help' and is_owner(msg) then
 			local name_log = user_print_name(msg.from)
@@ -3616,5 +3594,3 @@ return {
   run = run,
   pre_process = pre_process
 }
---End supergrpup.lua
---By @Rondoozle
