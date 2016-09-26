@@ -5,7 +5,7 @@ local group_lang = redis:hget(hash,'lang')
 if matches[1] == 'setlang' and  matches[2] == 'en' and is_owner(msg) then 
     
    redis:hdel(hash,'lang')
-        return 'Group Lang Set to : En'
+        return '☑Group Lang Set to : En☑'
 end
 
 
