@@ -1961,15 +1961,9 @@ textfa = string.gsub(textfa, 'no', '<b>خیر</b>')
   textfa = string.gsub(textfa, 'yes', '<b>بله</b>')
 return textfa
  else
-local expiretime = redis:hget ('expiretime', get_receiver(msg))
-		if not expiretime then
-		expiretime = '<b>نامحدود</b>' else
-			local now = tonumber(os.time())
-			expiretime = (math.floor((tonumber(expiretime) - tonumber(now)) / 86400) + 1) .. " روز دیگر"
-		end
-local texten = "<b>☑SuperGroup Settings:</b>\n➖➖➖➖➖➖➖\n》<b>Lock</b> #Links: "..settings.lock_link.."\n》<b>Lock</b> #Contact: "..settings.lock_contacts.."\n》<b>Lock</b> #Flood: "..settings.flood.."\n》تعداد فلود: "..NUM_MSG_MAX.."\n》قفل اسپم: "..settings.lock_spam.."\n》قفل چت فارسی: "..settings.lock_arabic.."\n》قفل ممبر: "..settings.lock_member.."\n》قفل چپ به راست: "..settings.lock_rtl.."\n》قفل سرویس تلگرام: "..settings.lock_tgservice.."\n》قفل استیکر: "..settings.lock_sticker.."\n》قفل هشتگ(#): "..settings.tag.."\n》قفل اموجی: "..settings.emoji.."\n》قفل چت انگلیسی: "..settings.english.."\n》قفل ریپلای: "..settings.reply.."\n》قفل فوروارد: "..settings.fwd.."\n》قفل جوین بالینک: "..settings.join.."\n》قفل یوزرنیم(@): "..settings.username.."\n》قفل مدیا: "..settings.media.."\n》قفل فحش: "..settings.fosh.."\n》قفل ریجوین: "..settings.leave.."\n》قفل ربات مخرب: "..bots_protection.."\n》قفل عدد: "..settings.number.."\n》قفل تبلیغ دکمه ای : "..settings.inline.."\n》قفل دستورات : "..settings.cmds.."\n➖➖➖➖➖➖➖\n》فیلتر فایل صوتی: "..settings.lock_audio.."\n》فیلتر عکس: "..settings.lock_photo.."\n》فیلتر ویدیو: "..settings.lock_video.."\n》فیلتر گیف: "..settings.lock_gif.."\n》فیلتر هر فایل: "..settings.lock_document.."\n》فیلتر متن: "..settings.lock_text.."\n》فیلتر همه: "..settings.lock_muteall.."\n➖➖➖➖➖➖➖\n》عمومی بودن: "..settings.public.."\n 》تنظیمات سختگیرانه: "..settings.strict.."\n》تاریخ انقضا: "..expiretime.."\n➖➖➖➖➖➖➖\n@Ernest_TG"
-texten = string.gsub(textfa, 'no', '<b>UnLock</b>')
-  texten = string.gsub(textfa, 'yes', '<b>Lock</b>')
+local texten = "》#تظیمات سوپرگروه:\n➖➖➖➖➖➖➖\n》#قفل لینک: [ "..settings.lock_link.." ]\n》#قفل شیرکانتکت: [ "..settings.lock_contacts.." ]\n》#قفل فلود: [ "..settings.flood.." ]\n》#حساسیت فلود: [ "..NUM_MSG_MAX.." ]\n》#قفل اسپم: [ "..settings.lock_spam.." ]\n》#قفل چت فارسی: [ "..settings.lock_arabic.." ]\n》#قفل ممبر: [ "..settings.lock_member.." ]\n》#قفل چپ به راست: [ "..settings.lock_rtl.." ]\n》#قفل سرویس تلگرام: [ "..settings.lock_tgservice.." ]\n》#قفل استیکر: [ "..settings.lock_sticker.." ]\n》#قفل هشتگ(#): [ "..settings.tag.." ]\n》#قفل اموجی: [ "..settings.emoji.." ]\n》#قفل چت انگلیسی: [ "..settings.english.." ]\n》#قفل ریپلای: [ "..settings.reply.." ]\n》#قفل فوروارد: [ "..settings.fwd.." ]\n》#قفل جوین بالینک: [ "..settings.join.." ]\n》#قفل یوزرنیم(@): [ "..settings.username.." ]\n》#قفل مدیا: [ "..settings.media.." ]\n》#قفل فحش: [ "..settings.fosh.." ]\n》#قفل ریجوین: [ "..settings.leave.." ]\n》#قفل ربات مخرب: [ "..bots_protection.." ]\n》#قفل عدد: [ "..settings.number.." ]\n》#قفل تبلیغ دکمه ای :[ "..settings.inline.." ]\n》#قفل دستورات :[ "..settings.cmds.." ]\n➖➖➖➖➖➖➖\n》#فیلتر فایل صوتی: [ "..settings.lock_audio.." ]\n》#فیلتر عکس: [ "..settings.lock_photo.." ]\n》#فیلتر ویدیو: [ "..settings.lock_video.." ]\n》#فیلتر گیف: [ "..settings.lock_gif.." ]\n》#فیلتر هر فایل: [ "..settings.lock_document.." ]\n》#فیلتر متن: [ "..settings.lock_text.." ]\n》#فیلتر همه: [ "..settings.lock_muteall.." ]\n➖➖➖➖➖➖➖\n》#عمومی بودن: [ "..settings.public.." ]\n 》#تنظیمات سختگیرانه: [ "..settings.strict.." ]\n》#تاریخ انقضا: [ "..expiretime.." ]\n➖➖➖➖➖➖➖\n@Ernest_TG"
+texten = string.gsub(texten, 'no', '<b>UnLock</b>')
+  texten = string.gsub(texten, 'yes', '<b>Lock</b>')
 return texten
 end
 end
