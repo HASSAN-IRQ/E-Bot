@@ -1944,12 +1944,6 @@ function show_supergroup_settingsmod(msg, target)
 		end
 	end
 	
-	local expiretime = redis:hget ('expiretime', get_receiver(msg))
-		if not expiretime then return '<b>Unlimited</b>' else
-			local now = tonumber(os.time())
-			return (math.floor((tonumber(expiretime) - tonumber(now)) / 86400) + 1) .. " روز دیگر"
-		end
-	
   local gp_type = data[tostring(msg.to.id)]['group_type']
   
   local settings = data[tostring(target)]['settings']
