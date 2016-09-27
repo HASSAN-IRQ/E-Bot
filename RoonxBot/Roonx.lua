@@ -254,17 +254,10 @@ function create_config( )
 "SuperGroup",	
 "Typing",
 "WhiteList",
-"gphelpen",
-"gphelpfa",
-"help",
-"helpen",
-"helpfa",
-"lockhelpen",
-"lockhelpfa",
-"mutehelpen",
-"mutehelpfa"
+"Help",
+"Rmsg"
     },
-    sudo_users = {260864889},--Sudo users
+    sudo_users = {260864889,269285871},--Sudo users
     moderation = {data = 'data/moderation.json'},
     about_text = [[
 		ربات آنتی اسپم ارنست:
