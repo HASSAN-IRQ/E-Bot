@@ -69,10 +69,10 @@ do
 #unmute [gifs-audio-video-photo-text-documents-all]
 🔃آنمیوت کردن امکانات بالا
 ➖➖➖➖➖➖➖➖➖
-#unlock [links-flood-arabic-member-english-sticker-contacts-strict-tgservice-fwd-reply-fosh-leave-tag-emoji-username-join-media-bots-number]
+#unlock [links-flood-arabic-member-english-sticker-contacts-strict-tgservice-fwd-reply-fosh-leave-tag-username-join-media-bots]
 🔃باز کردن امکانات بالا
 ➖➖➖➖➖➖➖➖➖
-#lock [links-flood-arabic-member-english-sticker-contacts-strict-tgservice-fwd-reply-fosh-leave-tag-emoji-username-join-media-bots-number]
+#lock [links-flood-arabic-member-english-sticker-contacts-strict-tgservice-fwd-reply-fosh-leave-tag-username-join-media-bots]
 🔃قفل امکانات بالا
 ➖➖➖➖➖➖➖➖➖
 #public [yes|no]
