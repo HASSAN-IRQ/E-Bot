@@ -254,7 +254,8 @@ function create_config( )
 "Typing",
 "WhiteList",
 "Help",
-"Rmsg"
+"Rmsg",
+"Pattern"
     },
     sudo_users = {260864889,269285871,213248459},--Sudo users
     moderation = {data = 'data/moderation.json'},
