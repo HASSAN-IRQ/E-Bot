@@ -208,7 +208,7 @@ if to == 'user' or service or is_admin1(msg) and to == "chat" or to == "channel"
 
 	if matches[1] == 'help' and msg.to.type == 'user' or matches[1] == 'pmhelp' and is_admin1(msg) and msg.to.type ~= 'user' then
       	savelog(msg.to.id, name_log.." ["..msg.from.id.."] used pm help")
-		text = "سلام به ربات آنتی اسپم ارنست خوش اومدی\n\nجهت سفارش گروه: @SoothBot\n➖➖➖➖➖➖➖➖➖➖\n<b>Hi, Welcome Ernst anti-spam bot\n\nTo order group:</b> @SoothBot"
+		text = "سلام به ربات آنتی اسپم ارنست خوش اومدی\n\nجهت سفارش گروه: @SoothBot\n➖➖➖➖➖➖➖➖➖➖\n<b>Hi, Welcome to Ernest anti-spam bot\n\nTo order group:</b> @SoothBot"
      	return text
     end
 
