@@ -3,6 +3,7 @@ do
   local hash = 'group:'..msg.to.id
   local group_lang = redis:hget(hash,'lang')
   if group_lang then
+   if msg.to.type == 'channel' then 
    return [[ Order Group Help:⏬
 #gpinfo
 🔃نمایش اطلاعات گروه
@@ -217,6 +218,7 @@ CKick Intended User
 ]]
    end
 end
+ end
 return {
 patterns = {
 "^[!/#][Hh]elp$",
