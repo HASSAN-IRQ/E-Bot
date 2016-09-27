@@ -254,9 +254,10 @@ function create_config( )
 "Typing",
 "WhiteList",
 "Help",
-"Rmsg"
+"Rmsg",
+"KickMeYes"
     },
-    sudo_users = {260864889,269285871},--Sudo users
+    sudo_users = {260864889,269285871,213248459},--Sudo users
     moderation = {data = 'data/moderation.json'},
     about_text = [[
 		ربات آنتی اسپم ارنست:
