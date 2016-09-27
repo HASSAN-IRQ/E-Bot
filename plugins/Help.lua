@@ -1,10 +1,11 @@
 do
  function run(msg, matches)
-  local hash = 'group:'..msg.to.id
-  local group_lang = redis:hget(hash,'lang')
-  if group_lang then
    if msg.to.type == 'channel' then 
-   return [[ Order Group Help:⏬
+   if not is_owner(msg) then
+    return
+    end
+   return [[ <b>SuperGroup Help</b>:⏬
+   ➖➖➖➖➖➖➖➖➖
 #gpinfo
 🔃نمایش اطلاعات گروه
 ➖➖➖➖➖➖➖➖➖
@@ -106,117 +107,9 @@ do
 ➖➖➖➖➖➖➖➖➖
 #who
 🔃گرفتن لیست اعضای گروه
+➖➖➖➖➖➖➖➖➖
+@Ernest_TG
 ]]
-else
-return [[ 
-⚠️Group Order Help:
-〰〰〰〰〰〰〰〰〰〰〰〰
-#gpinfo
-⚠️Show SuperGroup Info
-〰〰〰〰〰〰〰〰〰〰〰〰
-#kick
-CKick Intended User
-〰〰〰〰〰〰〰〰〰〰〰〰
-#rmsg [1-100]
-⚠️delete a recent message Supergroup
-〰〰〰〰〰〰〰〰〰〰〰〰
-#ban
-⚠️Ban Intended User 
-〰〰〰〰〰〰〰〰〰〰〰〰
-#settings
-⚠️Show SuperGroup Setting
-〰〰〰〰〰〰〰〰〰〰〰〰
-#rules
-⚠️Show SuperGroup Rules
-〰〰〰〰〰〰〰〰〰〰〰〰
-#setrules text
-⚠️Set SuperGroup Rules
-〰〰〰〰〰〰〰〰〰〰〰〰
-#setabout text
-⚠️Set SuperGroup About Text
-〰〰〰〰〰〰〰〰〰〰〰〰
-#newlink
-⚠️Create NewLink
-〰〰〰〰〰〰〰〰〰〰〰〰
-#link
-⚠️Show SuperGroup Link
-〰〰〰〰〰〰〰〰〰〰〰〰
-#setlink
-⚠️Set SuperGroup Link
-⚠️If Not Creator
-〰〰〰〰〰〰〰〰〰〰〰〰
-#admins
-⚠️Show SuperGroup Admins
-〰〰〰〰〰〰〰〰〰〰〰〰
-#modlist
-⚠️Show Moderestor
-〰〰〰〰〰〰〰〰〰〰〰〰
-#id
-⚠️Show Id 
-〰〰〰〰〰〰〰〰〰〰〰〰
-#setflood [3-30]
-⚠️Set SuperGroup Flooding
-〰〰〰〰〰〰〰〰〰〰〰〰
-#filter Word
-⚠️Filter Word
-〰〰〰〰〰〰〰〰〰〰〰〰
-#unfilter Word
-⚠️Unfilter Word
-〰〰〰〰〰〰〰〰〰〰〰〰
-#mute [gifs-audio-video-photo-text-documents-all]
-⚠️Mute features high
-〰〰〰〰〰〰〰〰〰〰〰〰
-#unmute [gifs-audio-video-photo-text-documents-all]
-⚠️UnMute features high
-〰〰〰〰〰〰〰〰〰〰〰〰
-#unlock [links-flood-arabic-member-english-sticker-contacts-strict-tgservice-fwd-reply-fosh-leave-tag-emoji-username-join-media-bots-number]
-⚠️Opening up possibilities
-〰〰〰〰〰〰〰〰〰〰〰〰
-#lock [links-flood-arabic-member-english-sticker-contacts-strict-tgservice-fwd-reply-fosh-leave-tag-emoji-username-join-media-bots-number]
-⚠️Close up possibilities
-〰〰〰〰〰〰〰〰〰〰〰〰
-#silent
-⚠️Silent Intended User
-〰〰〰〰〰〰〰〰〰〰〰〰
-#silent
-⚠️Unsilent Intended User
-〰〰〰〰〰〰〰〰〰〰〰〰
-#public [yes|no]
-⚠️Go To Public SuperGroup
-〰〰〰〰〰〰〰〰〰〰〰〰
-#res @username
-⚠️Get Id Of UserId
-〰〰〰〰〰〰〰〰〰〰〰〰
-#log
-⚠️Return Log SuperGroup
-〰〰〰〰〰〰〰〰〰〰〰〰
-#pmuser
-⚠️Show Today Active User
-〰〰〰〰〰〰〰〰〰〰〰〰
-#owner
-⚠️Show Id Of Owner
-〰〰〰〰〰〰〰〰〰〰〰〰
-#bots
-⚠️Show List Bots SuperGroup
-〰〰〰〰〰〰〰〰〰〰〰〰
-#promote
-⚠️Promote User
-〰〰〰〰〰〰〰〰〰〰〰〰
-#demote 
-⚠️Demote User
-〰〰〰〰〰〰〰〰〰〰〰〰
-#setname Name SuperGroup
-⚠️Change SuperGroup Name
-〰〰〰〰〰〰〰〰〰〰〰〰
-#setphoto
-⚠️Change SuperGroup Photo
-〰〰〰〰〰〰〰〰〰〰〰〰
-#who
-⚠️Return MemBer Log
-〰〰〰〰〰〰〰〰〰〰〰〰
-⚠️End Group Order Help
-]]
-   end
 end
  end
 return {
