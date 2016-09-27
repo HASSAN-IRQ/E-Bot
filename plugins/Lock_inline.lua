@@ -24,5 +24,3 @@ return {
   run = run
 }
 
--- by @sudo1
--- @specialteam_h
