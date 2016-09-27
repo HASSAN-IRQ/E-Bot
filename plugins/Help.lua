@@ -1,44 +1,9 @@
 do
  function run(msg, matches)
-if matches[1] == 'help' then
-return [[ 
-نمایش فارسی راهنمای ربات
-#help fa
-نمایش انگلیسی راهنمای ربات
-#help en
-➖➖➖➖➖➖➖➖
-Show FA Help
-#help fa
-Show EN Help
-#help en
-➖➖➖➖➖➖➖➖
-@Ernest_TG
-]]
-end
-if matches[1] == 'help' and matches[2] == 'fa' then	
-return [[ راهنمای دستورات
-⚠️نمایش راهنمای گروه⚠️
-#Ghelp fa
-⚜نمایش دستورات قفل و بازکردن⚜
-#lock fa
-☄نمایش راهنمای موت و انموت کردن☄
-#Mute fa
-]]
-end
-if matches[1] == 'help' and matches[2] == 'en' then	
-return [[ 🔆For See Help🔆
-〰〰〰〰〰〰〰〰〰
-〽️See Group Order〽️
-#Ghelp en
-〰〰〰〰〰〰〰〰〰
-⚜Lock And Unlock Group Help
-#lock en
-〰〰〰〰〰〰〰〰〰
-〽️Mute And Unmute Help〽️
-#Mute en]]
-end
-if matches[1] == 'ghelp' and matches[2] == 'fa' then	
-return [[ Order Group Help:⏬
+  local hash = 'group:'..msg.to.id
+  local group_lang = redis:hget(hash,'lang')
+  if group_lang then
+   return [[ Order Group Help:⏬
 #gpinfo
 🔃نمایش اطلاعات گروه
 ➖➖➖➖➖➖➖➖➖
@@ -96,6 +61,18 @@ return [[ Order Group Help:⏬
 #silent
 🔃دراوردن کاربر موت شده
 ➖➖➖➖➖➖➖➖➖
+#mute [gifs-audio-video-photo-text-documents-all]
+🔃میوت کردن امکانات بالا
+➖➖➖➖➖➖➖➖➖
+#unmute [gifs-audio-video-photo-text-documents-all]
+🔃آنمیوت کردن امکانات بالا
+➖➖➖➖➖➖➖➖➖
+#unlock [links-flood-arabic-member-english-sticker-contacts-strict-tgservice-fwd-reply-fosh-leave-tag-emoji-username-join-media-bots-number]
+🔃باز کردن امکانات بالا
+➖➖➖➖➖➖➖➖➖
+#lock [links-flood-arabic-member-english-sticker-contacts-strict-tgservice-fwd-reply-fosh-leave-tag-emoji-username-join-media-bots-number]
+🔃قفل امکانات بالا
+➖➖➖➖➖➖➖➖➖
 #public [yes|no]
 🔃عمومی و خصوصی کردن گروه
 ➖➖➖➖➖➖➖➖➖
@@ -129,8 +106,7 @@ return [[ Order Group Help:⏬
 #who
 🔃گرفتن لیست اعضای گروه
 ]]
-end	
-if matches[1] == 'ghelp' and matches[2] == 'en' then	
+else
 return [[ 
 ⚠️Group Order Help:
 〰〰〰〰〰〰〰〰〰〰〰〰
@@ -186,6 +162,18 @@ CKick Intended User
 #unfilter Word
 ⚠️Unfilter Word
 〰〰〰〰〰〰〰〰〰〰〰〰
+#mute [gifs-audio-video-photo-text-documents-all]
+⚠️Mute features high
+〰〰〰〰〰〰〰〰〰〰〰〰
+#unmute [gifs-audio-video-photo-text-documents-all]
+⚠️UnMute features high
+〰〰〰〰〰〰〰〰〰〰〰〰
+#unlock [links-flood-arabic-member-english-sticker-contacts-strict-tgservice-fwd-reply-fosh-leave-tag-emoji-username-join-media-bots-number]
+⚠️Opening up possibilities
+〰〰〰〰〰〰〰〰〰〰〰〰
+#lock [links-flood-arabic-member-english-sticker-contacts-strict-tgservice-fwd-reply-fosh-leave-tag-emoji-username-join-media-bots-number]
+⚠️Close up possibilities
+〰〰〰〰〰〰〰〰〰〰〰〰
 #silent
 ⚠️Silent Intended User
 〰〰〰〰〰〰〰〰〰〰〰〰
@@ -227,242 +215,11 @@ CKick Intended User
 〰〰〰〰〰〰〰〰〰〰〰〰
 ⚠️End Group Order Help
 ]]
+   end
 end
-if matches[1] == 'lock' and matches[2] == 'fa' then	
-return [[ Lock Help:⏬
-#lock links  
-➰بستن  لینک گروه
-➖➖➖➖➖➖➖➖➖
-#lock flood   
-➰بستن  حساسیت ارسال پشت سرهم
-➖➖➖➖➖➖➖➖➖
-#lock arabic   
-➰بستن  چت کردن به زبان فارسی
-➖➖➖➖➖➖➖➖➖
-#lock member 
-➰بستن  اد کردن اشخاص درگروه
-➖➖➖➖➖➖➖➖➖
-#lock english  
-➰بستن  چت کردن انگلیسی
-➖➖➖➖➖➖➖➖➖
-#lock sticker  
-➰بستن  ارسال استیکر 
-➖➖➖➖➖➖➖➖➖
-#lock contacts  
-➰بستن  ارسال شماره تلفن
-➖➖➖➖➖➖➖➖➖
-#lock strict   
-➰سخت گیرانه کردن تنظیمات
-➖➖➖➖➖➖➖➖➖
-#lock tgservice 
-➰بستن  سرویس های تی جی ربات
-➖➖➖➖➖➖➖➖➖
-#lock fwd  
-➰ بستن  فرواردکردن درگروه
-➖➖➖➖➖➖➖➖➖
-#lock reply 
-➰بستن  ریپلای درگروه
-➖➖➖➖➖➖➖➖➖
-#lock fosh 
-➰بستن  فحش درگروه
-➖➖➖➖➖➖➖➖➖
-#lock leave 
-➰جوین دادن دوباره ممکن نیست
-➖➖➖➖➖➖➖➖➖
-#lock tag   
-➰بستن  هشتگ # 
-➖➖➖➖➖➖➖➖➖
-#lock emoji  
-➰بستن  امجو
-➖➖➖➖➖➖➖➖➖
-#lock username   
-➰بستن  یوزرنیم @
-➖➖➖➖➖➖➖➖➖
-#lock join   
-➰بستن  جوین به وسیله لینک
-➖➖➖➖➖➖➖➖➖
-#lock media 
-➰بستن  ارسال مدیا
-➖➖➖➖➖➖➖➖➖
-#lock bots
-➰بستن ربات مخرب
-➖➖➖➖➖➖➖➖➖
-#lock number
-➰بستن ارسال عدد
-➖➖➖➖➖➖➖➖➖
-برای باز کردن به جای lock باید unlock بذارین.
-]]
-end
-if matches[1] == 'lock' and matches[2] == 'en' then	
-return [[ 
-LockHelp:
-〰〰〰〰〰〰〰〰〰〰〰
-#lock links
-⚠️Close Link Ads⚠️
-〰〰〰〰〰〰〰〰〰〰〰
-#lock flood
-⚠️Close Flood Sending⚠️
-〰〰〰〰〰〰〰〰〰〰〰
-#lock arabic
-⚠️Close Arabic/Persia⚠️
-〰〰〰〰〰〰〰〰〰〰〰
-#lock member
-⚠️Close MemeBerAdder⚠️
-〰〰〰〰〰〰〰〰〰〰〰
-#lock english
-⚠️Close English⚠️
-〰〰〰〰〰〰〰〰〰〰〰
-#lock sticker
-Close SendSticker⚠️
-〰〰〰〰〰〰〰〰〰〰〰
-#lock contacts
-⚠️Close Contacts PosT⚠️
-〰〰〰〰〰〰〰〰〰〰〰
-#lock strict
-⚠️Hard Settings:Yes⚠️
-〰〰〰〰〰〰〰〰〰〰〰
-#lock tgservice
-⚠️Close TgService⚠️
-〰〰〰〰〰〰〰〰〰〰〰
-#lock fwd
-⚠️Close Forwarding Post⚠️
-〰〰〰〰〰〰〰〰〰〰〰
-#lock reply
-⚠️Close Reply⚠️
-〰〰〰〰〰〰〰〰〰〰〰
-#lock fosh
-⚠️Close BadWord⚠️
-〰〰〰〰〰〰〰〰〰〰〰
-#lock leave
-⚠️Close Rejoin⚠️
-〰〰〰〰〰〰〰〰〰〰〰
-#lock tag
-⚠️Close HashTag #⚠️
-〰〰〰〰〰〰〰〰〰〰〰
-#lock emoji
-⚠️Close Send Emoji⚠️
-〰〰〰〰〰〰〰〰〰〰〰
-#lock username
-⚠️Close @ Word⚠️
-〰〰〰〰〰〰〰〰〰〰〰
-#lock join
-⚠️Close JoinGroup⚠️
-〰〰〰〰〰〰〰〰〰〰〰
-#lock media
-⚠️Close Send AllMedia⚠️
-〰〰〰〰〰〰〰〰〰〰〰
-#lock bots
-⚠️Close Telegram Bots⚠️
-〰〰〰〰〰〰〰〰〰〰〰
-#lock number
-⚠️Close Send number⚠️
-〰〰〰〰〰〰〰〰〰〰〰
-Instead, let's open the lock to unlock.
-]]
-end
-if matches[1] == 'mute' and matches[2] == 'en' then	
-return [[ 
-⚠️MuteHelp⚠️:
-〰〰〰〰〰〰〰〰〰
-#mute gifs
-⚠️Close Send Gifs
-〰〰〰〰〰〰〰〰〰
-#mute audio
-⚠️Close Send Audio
-〰〰〰〰〰〰〰〰〰
-#mute video
-⚠️Close Send Video
-〰〰〰〰〰〰〰〰〰
-#mute photo
-⚠️Close Send Photo
-〰〰〰〰〰〰〰〰〰
-#mute all
-⚠️Silent Group
-〰〰〰〰〰〰〰〰〰
-<b>⚠️UnMuteHelp⚠️:</b>
-〰〰〰〰〰〰〰〰〰
-#unmute gifs
-⚠️Open Send Gifs
-〰〰〰〰〰〰〰〰〰
-#unmute audio
-⚠️Open Send Audio
-〰〰〰〰〰〰〰〰〰
-#unmute video
-⚠️Open Send Video
-〰〰〰〰〰〰〰〰〰
-#unmute photo
-⚠️Open Send Photo
-〰〰〰〰〰〰〰〰〰
-#unmute all
-⚠️UnSilent Group
-]]		
-end						
-if matches[1] == 'mute' and matches[2] == 'fa' then
-return [[ Mute Help:⏬
-#mute gifs
-➰بستن ارسال گیف
-➖➖➖➖➖➖➖➖➖
-#mute audio
-➰بستن ارسال فایل صوتی
-➖➖➖➖➖➖➖➖➖
-#mute video
-➰بستن ارسال ویدیو
-➖➖➖➖➖➖➖➖➖
-#mute photo
-➰بستن ارسال عکس
-➖➖➖➖➖➖➖➖➖
-#mute text
-➰بستن ارسال نوشته
-➖➖➖➖➖➖➖➖➖
-#mute all
-➰بستن همه
-➖➖➖➖➖➖➖➖➖
-<b>Unmute Help:⏬</b>
-➖➖➖➖➖➖➖➖➖
-#unmute gifs
-➰بازکردن ارسال گیف
-➖➖➖➖➖➖➖➖➖
-#unmute audio
-➰بازکردن ارسال فایل صوتی
-➖➖➖➖➖➖➖➖➖
-#unmute video
-➰بازکردن ارسال ویدیو
-➖➖➖➖➖➖➖➖➖
-#unmute photo
-➰بازکردن ارسال عکس
-➖➖➖➖➖➖➖➖➖
-#unmute text
-➰بازکردن ارسال نوشته
-➖➖➖➖➖➖➖➖➖
-#unmute all
-➰بازکردن همه
-➖➖➖➖➖➖➖➖➖
-<b>Silent Help:⏬</b>
-➖➖➖➖➖➖➖➖➖
-#silent @username
-#silent by ryple
-➰موت کردن یک کاربر
-➖➖➖➖➖➖➖➖➖
-#unsilent[id|username]
-➰انموت کردن یک کاربر
-➖➖➖➖➖➖➖➖➖
-#silentlist
-➰نمایش کاربران موت شده
-]]
-end
-end
-			
 return {
 patterns = {
 "^[!/#][Hh]elp$",
-"^[!/#][Hh]elp [Ff]a$",
-"^[!/#][Hh]elp [Ee]n$",
-"^[!/#][Gg]help [Ff]a$",
-"^[!/#][Gg]help [Ee]n$",
-"^[!/#][Ll]ock [Ff]a$",
-"^[!/#][Ll]ock [Ee]n$",
-"^[!/#][Mm]ute [Ee]n$",
-"^[!/#][Mm]ute [Ff]a$"
 },
 run = run
 }
