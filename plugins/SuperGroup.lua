@@ -2560,7 +2560,7 @@ local function run(msg, matches)
 				resolve_username(username,  callbackres, cbres_extra)
 			else
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested SuperGroup ID")
-				  return reply_msg(msg.id,"🔘#GroupID💭➣ "..msg.from.id.."\n🔘#GroupName💭➣ "..msg.to.title.."\n🔘#YourName💭➣ "..(msg.from.first_name or '').."\n🔘#FirstName💭➣ "..(msg.from.first_name or '').."\n🔘#LastName💭➣ "..(msg.from.last_name or '').."\n🔘#ID💭➣ "..msg.from.id.."\n🔘#Username💭➣ @"..(msg.from.username or '').."\n🔘#Phone💭➣ +"..(msg.from.phone or ''), ok_cb, false) 
+				  return reply_msg(msg.id,"🔘#GroupID💭➣ "..msg.from.id.."\n🔘#GroupName💭➣ "..msg.to.title.."\n🔘#YourName💭➣ "..(msg.from.first_name or '').."\n🔘#FirstName💭➣ "..(msg.from.first_name or '').."\n🔘#LastName💭➣ "..(msg.from.last_name or '').."\n🔘#ID💭➣ "..msg.from.id.."\n🔘#Username💭➣ @"..(msg.from.username or ''), ok_cb, false) 
 			end
 		end
 
