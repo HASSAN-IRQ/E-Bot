@@ -1,4 +1,4 @@
-# Roonx-Bot
+# Ernest-Bot
 
 ```sh
 # Install dependencies.
