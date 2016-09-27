@@ -1,6 +1,6 @@
 do
  function run(msg, matches)
-if matches[1] == 'help' and is_momod2(msg) then
+if matches[1] == 'help' then
 return [[ 
 نمایش فارسی راهنمای ربات
 #help fa
@@ -15,7 +15,7 @@ Show EN Help
 @Ernest_TG
 ]]
 end
-if matches[1] == 'help' and matches[2] == 'fa' and is_momod2(msg) then	
+if matches[1] == 'help' and matches[2] == 'fa' then	
 return [[ راهنمای دستورات
 ⚠️نمایش راهنمای گروه⚠️
 #Ghelp fa
@@ -25,7 +25,7 @@ return [[ راهنمای دستورات
 #Mute fa
 ]]
 end
-if matches[1] == 'help' and matches[2] == 'en' and is_momod2(msg) then	
+if matches[1] == 'help' and matches[2] == 'en' then	
 return [[ 🔆For See Help🔆
 〰〰〰〰〰〰〰〰〰
 〽️See Group Order〽️
@@ -37,7 +37,7 @@ return [[ 🔆For See Help🔆
 〽️Mute And Unmute Help〽️
 #Mute en]]
 end
-if matches[1] == 'ghelp' and matches[2] == 'fa' and is_momod2(msg) then	
+if matches[1] == 'ghelp' and matches[2] == 'fa' then	
 return [[ Order Group Help:⏬
 #gpinfo
 🔃نمایش اطلاعات گروه
@@ -130,7 +130,7 @@ return [[ Order Group Help:⏬
 🔃گرفتن لیست اعضای گروه
 ]]
 end	
-if matches[1] == 'ghelp' and matches[2] == 'en' and is_momod2(msg) then	
+if matches[1] == 'ghelp' and matches[2] == 'en' then	
 return [[ 
 ⚠️Group Order Help:
 〰〰〰〰〰〰〰〰〰〰〰〰
@@ -228,7 +228,7 @@ CKick Intended User
 ⚠️End Group Order Help
 ]]
 end
-if matches[1] == 'lock' and matches[2] == 'fa' and is_momod2(msg) then	
+if matches[1] == 'lock' and matches[2] == 'fa' then	
 return [[ Lock Help:⏬
 #lock links  
 ➰بستن  لینک گروه
@@ -293,7 +293,7 @@ return [[ Lock Help:⏬
 برای باز کردن به جای lock باید unlock بذارین.
 ]]
 end
-if matches[1] == 'lock' and matches[2] == 'en' and is_momod2(msg) then	
+if matches[1] == 'lock' and matches[2] == 'en' then	
 return [[ 
 LockHelp:
 〰〰〰〰〰〰〰〰〰〰〰
@@ -360,7 +360,7 @@ Close SendSticker⚠️
 Instead, let's open the lock to unlock.
 ]]
 end
-if matches[1] == 'mute' and matches[2] == 'en' and is_momod2(msg) then	
+if matches[1] == 'mute' and matches[2] == 'en' then	
 return [[ 
 ⚠️MuteHelp⚠️:
 〰〰〰〰〰〰〰〰〰
@@ -397,7 +397,7 @@ return [[
 ⚠️UnSilent Group
 ]]		
 end						
-if matches[1] == 'mute' and matches[2] == 'fa' and is_momod2(msg) then
+if matches[1] == 'mute' and matches[2] == 'fa' then
 return [[ Mute Help:⏬
 #mute gifs
 ➰بستن ارسال گیف
