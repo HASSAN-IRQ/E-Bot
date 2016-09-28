@@ -631,7 +631,55 @@ local function unlock_group_photo(msg, data, target)
   return '🔓photo Post HassBeen Unlocked🔓'
   end
 end
+local function lock_group_video(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_video_lock = data[tostring(target)]['settings']['lock_video']
+  if group_video_lock == 'yes' then
+    local hash = 'group:'..msg.to.id
+  local group_lang = redis:hget(hash,'lang')
+  if group_lang then    
+   return '🔐ارسال ویدیو همچنان قفل است🔐'
+  else
+  return '🔐video Post Already Locked🔐'
+  end 
+  end
+    data[tostring(target)]['settings']['lock_video'] = 'yes'
+    save_data(_config.moderation.data, data)
+     local hash = 'group:'..msg.to.id
+  local group_lang = redis:hget(hash,'lang')
+  if group_lang then 
+	return '🔐ارسال ویدیو قفل شد🔐'
+    else
+	return '🔐video Post Has Been Locked🔐'
+  end
+end
 
+local function unlock_group_video(msg, data, target)
+  if not is_momod(msg) then
+    return
+  end
+  local group_video_lock = data[tostring(target)]['settings']['lock_video']
+  if group_video_lock == 'no' then
+ local hash = 'group:'..msg.to.id
+  local group_lang = redis:hget(hash,'lang')
+  if group_lang then    
+   return '🔓ارسال ویدیو قفل نیست🔓'
+  else
+  return '🔓video Post Not Locked🔓'
+  end 
+  end
+    data[tostring(target)]['settings']['lock_video'] = 'no'
+    save_data(_config.moderation.data, data)
+     local hash = 'group:'..msg.to.id
+  local group_lang = redis:hget(hash,'lang')
+  if group_lang then 
+	return '🔓ارسال ویدیو باز شد🔓'
+  else
+  return '🔓video Post HassBeen Unlocked🔓'
+  end
+end
 local function lock_group_muteall(msg, data, target)
   if not is_momod(msg) then
     return
