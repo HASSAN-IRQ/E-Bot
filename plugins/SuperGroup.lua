@@ -441,22 +441,22 @@ local function lock_group_gif(msg, data, target)
   end
   local group_gif_lock = data[tostring(target)]['settings']['lock_gif']
   if group_gif_lock == 'yes' then
-     local hash = 'group:'..msg.to.id
+    local hash = 'group:'..msg.to.id
   local group_lang = redis:hget(hash,'lang')
-  if group_lang then 
-	return '🔐ارسال صداهمچنان قفل است🔐'
+  if group_lang then    
+   return '🔐ارسال گیف همچنان قفل است🔐'
   else
-  return '🔐Gifs Post Already Locked🔐'
+  return '🔐gif Post Already Locked🔐'
   end 
   end
-    data[tostring(target)]['settings']['lock_gifs'] = 'yes'
+    data[tostring(target)]['settings']['lock_gif'] = 'yes'
     save_data(_config.moderation.data, data)
      local hash = 'group:'..msg.to.id
   local group_lang = redis:hget(hash,'lang')
   if group_lang then 
 	return '🔐ارسال گیف قفل شد🔐'
-   else
-   return '🔐Gifs Post HassBeen Locked🔐'
+    else
+	return '🔐gif Post Has Been Locked🔐'
   end
 end
 
@@ -466,12 +466,12 @@ local function unlock_group_gif(msg, data, target)
   end
   local group_gif_lock = data[tostring(target)]['settings']['lock_gif']
   if group_gif_lock == 'no' then
-     local hash = 'group:'..msg.to.id
+ local hash = 'group:'..msg.to.id
   local group_lang = redis:hget(hash,'lang')
   if group_lang then    
    return '🔓ارسال گیف قفل نیست🔓'
   else
-  return '🔓Gifs Post Not Locked🔓'
+  return '🔓Gif Post Not Locked🔓'
   end 
   end
     data[tostring(target)]['settings']['lock_gif'] = 'no'
@@ -480,8 +480,8 @@ local function unlock_group_gif(msg, data, target)
   local group_lang = redis:hget(hash,'lang')
   if group_lang then 
 	return '🔓ارسال گیف باز شد🔓'
-      else
-  return '🔓Gifs Post HassBeen Unlocked🔓'	  
+  else
+  return '🔓Gif Post HassBeen Unlocked🔓'
   end
 end
 local function lock_group_document(msg, data, target)
@@ -2608,7 +2608,7 @@ local function run(msg, matches)
 				resolve_username(username,  callbackres, cbres_extra)
 			else
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested SuperGroup ID")
-				  return reply_msg(msg.id,"🔘#GroupID💭➣ "..msg.from.id.."\n🔘#GroupName💭➣ "..msg.to.title.."\n🔘#YourName💭➣ "..(msg.from.first_name or '').."\n🔘#FirstName💭➣ "..(msg.from.first_name or '').."\n🔘#LastName💭➣ "..(msg.from.last_name or '').."\n🔘#ID💭➣ "..msg.from.id.."\n🔘#Username💭➣ @"..(msg.from.username or ''), ok_cb, false) 
+				  return reply_msg(msg.id,"🔘#GroupID💭➣ "..msg.to.id.."\n🔘#GroupName💭➣ "..msg.to.title.."\n🔘#YourName💭➣ "..(msg.from.first_name or '').."\n🔘#FirstName💭➣ "..(msg.from.first_name or '').."\n🔘#LastName💭➣ "..(msg.from.last_name or '').."\n🔘#ID💭➣ "..msg.from.id.."\n🔘#Username💭➣ @"..(msg.from.username or ''), ok_cb, false) 
 			end
 		end
 
