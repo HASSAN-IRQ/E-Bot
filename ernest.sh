@@ -1,27 +1,3 @@
-#!/bin/bash
-# =====================================================================================================
-# Copyright (C) steady.sh v1.2 2016 iicc (@iicc1)
-# =====================================================================================================
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-# this program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-# GNU General Public License for more details.
-# You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.
-# =======================================================================================================
-# It depends on Tmux https://github.com/tmux/tmux which is BSD-licensed
-# and Screen https://www.gnu.org/software/screen GNU-licensed.
-# =======================================================================================================
-# This script is intended to control the state of a telegram-cli telegram bot running in background.
-# The idea is to get the bot fully operative all the time without any supervision by the user.
-# It should be able to recover the telegram bot in any case telegram-cli crashes, freezes or whatever.
-# This script works by tracing ctxt swithes value in kernel procces at a $RELOADTIME
-# So it can detect any kind of kernel interruption with the procces and reload the bot.
-
-
-# Some script variables
 OK=0
 BAD=0
 NONVOLUNTARY=1
@@ -56,8 +32,8 @@ cat << EOF
 
 EOF
 echo -e "\e[100mCLI  اتولانچ پیشرفته\e[00;37;40m" # Time between checking cpu calls of the cli process. Set the value high if your bo
-echo -e "\e[01;34mمحمد\e[00;37;40m" # Time between checking cpu calls of the cli process. Set the value high if your bo
-echo -e "\e[01;34mkiavaprotection\e[00;37;40m" # Time between checking cpu calls of the cli process. Set the value high if your bo
+echo -e "\e[01;34mMosiAm\e[00;37;40m" # Time between checking cpu calls of the cli process. Set the value high if your bo
+echo -e "\e[01;34m@Ernest_TM\e[00;37;40m" # Time between checking cpu calls of the cli process. Set the value high if your bo
 echo ""
 
 sleep 1.2
@@ -76,8 +52,8 @@ sleep 0.5
 
 
 echo ""
-echo -e "\033[38;5;208m By @MohamamdDeveloper\033[0;00m"
-echo -e "\033[38;5;208m MuteTeam\033[0;00m"
+echo -e "\033[38;5;208m By @Ernest_TM\033[0;00m"
+echo -e "\033[38;5;208m Ernest TM\033[0;00m"
 echo -e "\033[38;5;208m Waiting...\033[0;00m"
 echo -e "\033[38;5;208m \033[0;00m"
 echo -e "\033[38;5;208m \033[0;00m"
@@ -145,7 +121,7 @@ while true; do
                 OK=$(( $OK + 1 ))
 
         else
-                echo -e "$f5 ربات به دلیل نامعلومی لانچ نشد با ارایه دهنده خدمات تماس حاصل کنید\nID:@MohammadDeveloper$rst"
+                echo -e "$f5 ربات به دلیل نامعلومی لانچ نشد با ارایه دهنده خدمات تماس حاصل کنید\nID:@SoothBot$rst"
                 BAD=$(( $BAD + 1 ))
                 sleep 1
 
@@ -213,8 +189,8 @@ cat << EOF
 
 EOF
 echo -e "\e[100mCLI  اتولانچ پیشرفته\e[00;37;40m"
-echo -e "\e[01;34mمحمد\e[00;37;40m"
-echo -e "\e[01;34mkiavaprotection\e[00;37;40m"
+echo -e "\e[01;34mMosiAm\e[00;37;40m"
+echo -e "\e[01;34m@Ernest_TM\e[00;37;40m"
 echo ""
 
 sleep 1.2
@@ -233,8 +209,8 @@ sleep 0.5
 
 
 echo ""
-echo -e "\033[38;5;208m By @MohammadDeveloper\033[0;00m"
-echo -e "\033[38;5;208m MuteTeam\033[0;00m"
+echo -e "\033[38;5;208m By @Ernest_TM\033[0;00m"
+echo -e "\033[38;5;208m Ernest TM\033[0;00m"
 echo -e "\033[38;5;208m Waiting...\033[0;00m"
 echo -e "\033[38;5;208m \033[0;00m"
 echo -e "\033[38;5;208m \033[0;00m"
@@ -527,8 +503,8 @@ while getopts ":tsTSih" opt; do
         echo -e "\e[0m"
 echo -e "\033[38;5;208m      Auto Launch\033[0;00m"
 echo -e "\033[38;5;208m           \033[0;00m"
-echo -e "\033[38;5;208m     By @MohammadDeveloper\033[0;00m"
-echo -e "\033[38;5;208m     MuteTeam\033[0;00m"
+echo -e "\033[38;5;208m     By @Ernest_TM\033[0;00m"
+echo -e "\033[38;5;208m     Ernest TM\033[0;00m"
 echo -e "\033[38;5;208m         Waiting...\033[0;00m"
 echo ""
         exit 1
