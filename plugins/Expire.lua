@@ -1,4 +1,31 @@
+local function check_member_superrem2(cb_extra, success, result)
+  local receiver = cb_extra.receiver
+  local data = cb_extra.data
+  local msg = cb_extra.msg
+  for k,v in pairs(result) do
+    local member_id = v.id
+    if member_id ~= our_id then
+	  -- Group configuration removal
+      data[tostring(msg.to.id)] = nil
+      save_data(_config.moderation.data, data)
+      local groups = 'groups'
+      if not data[tostring(groups)] then
+        data[tostring(groups)] = nil
+        save_data(_config.moderation.data, data)
+      end
+      data[tostring(groups)][tostring(msg.to.id)] = nil
+      save_data(_config.moderation.data, data)
+	  chat_del_user(get_receiver(msg), 'user#id'..235431064, ok_cb, false)
+	  leave_channel(get_receiver(msg), ok_cb, false)
+    end
+  end
+end
 
+local function superrem2(msg)
+	local data = load_data(_config.moderation.data)
+    local receiver = get_receiver(msg)
+    channel_get_users(receiver, check_member_superrem2,{receiver = receiver, data = data, msg = msg})
+end
 
 local function pre_process(msg)
 	local timetoexpire = 'unknown'
@@ -6,9 +33,12 @@ local function pre_process(msg)
 	local now = tonumber(os.time())
 	if expiretime then    
 		timetoexpire = math.floor((tonumber(expiretime) - tonumber(now)) / 86400) + 1
-		if tonumber("0") > tonumber(timetoexpire) and not is_sudo(msg) then
-		if msg.text:match('/') then
-			return send_large_msg(get_receiver(msg), 'تاریخ اتقضای گروه به پایان رسید.')
+		if tonumber("0") > tonumber(timetoexpire) then
+		if get_receiver(msg) then
+		redis:del('expiretime', get_receiver(msg))
+		rem_mutes(msg.to.id)
+		superrem2(msg)
+		return send_large_msg(get_receiver(msg), 'تاریخ اتقضای گروه به پایان رسید.\n از پشتیبانی در خواست تمدید کنید.')
 		else
 			return
 		end
@@ -53,11 +83,11 @@ function run(msg, matches)
 		local buytime = tonumber(os.time())
 		local timeexpire = tonumber(buytime) + (tonumber(matches[2]) * 86400)
 		redis:hset('expiretime',get_receiver(msg),timeexpire)
-		return "<b>Expire Time Set</b> "..matches[2].. " <b>Days</b> "
+		return "تاریخ انقضای گروه:\nبه "..matches[2].. " روز دیگر تنظیم شد."
 	end
 	if matches[1]:lower() == 'expire' then
 		local expiretime = redis:hget ('expiretime', get_receiver(msg))
-		if not expiretime then return '<b>Unlimited</b>' else
+		if not expiretime then return 'تاریخ ست نشده است' else
 			local now = tonumber(os.time())
 			return (math.floor((tonumber(expiretime) - tonumber(now)) / 86400) + 1) .. " روز دیگر"
 		end
@@ -66,8 +96,8 @@ function run(msg, matches)
 end
 return {
   patterns = {
-    "^[!/]([Ss]etexpire) (.*)$",
-	"^[!/]([Ee]xpire)$",
+    "^([Ss]etexpire) (.*)$",
+	"^([Ee]xpire)$",
   },
   run = run,
   pre_process = pre_process
