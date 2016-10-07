@@ -238,7 +238,6 @@ function create_config( )
 "Lock_inline",
 "Lock_join",
 "Lock_media",
-"Lock_reply",
 "Lock_tag",
 "Lock_username",
 "Msg_Checks",
