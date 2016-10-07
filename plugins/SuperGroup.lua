@@ -332,58 +332,6 @@ local function unlock_group_inline(msg, data, target)
      return '🔐Inline Posting Hasbeen unLocked🔓'
   end
 end
-
-
-local function lock_group_all(msg, data, target)
-  if not is_momod(msg) then
-    return
-  end
-  local group_all_lock = data[tostring(target)]['settings']['all']
-  if group_all_lock == 'yes' then
-    local hash = 'group:'..msg.to.id
-  local group_lang = redis:hget(hash,'lang')
-  if group_lang then
-	return '🔐قـُـفــل تمامے تنظیمات از قبل فعال بود✅'
-  else
-  return '🔐All Settings Already Locked🔐'
-  end
-  end
-    data[tostring(target)]['settings']['all'] = 'yes'
-    save_data(_config.moderation.data, data)
-     local hash = 'group:'..msg.to.id
-  local group_lang = redis:hget(hash,'lang')
-  if group_lang then
-	return '🔐قـُـفــل تمامے تنظیمات فعال گردید✅'
-  else
-  retuen '🔐All Settings HasBeen Locked🔐'
-  end
-end
-
-local function unlock_group_all(msg, data, target)
-  if not is_momod(msg) then
-    return
-  end
-  local group_all_lock = data[tostring(target)]['settings']['all']
-  if group_all_lock == 'no' then
-  local hash = 'group:'..msg.to.id
-  local group_lang = redis:hget(hash,'lang')
-  if group_lang then   
-   return '🔓قـُـفــل تمامے تنظیمات از قبل غیر فعال بود❌'
-  else
-  return '🔓All Setings Already Unlocked🔓'
-  end
-  end
-    data[tostring(target)]['settings']['all'] = 'no'
-    save_data(_config.moderation.data, data)
-local hash = 'group:'..msg.to.id
-  local group_lang = redis:hget(hash,'lang')
-  if group_lang then     
-  return '🔓قـُـفــل تمامے تنظیمات غیر فعال گردید❌'
-  else
-  return 'All Settings HasBeen Unlocked'
-  end
-end
-
 local function lock_group_audio(msg, data, target)
   if not is_momod(msg) then
     return
@@ -777,56 +725,6 @@ local function unlock_group_leave(msg, data, target)
   return ' 🔐قُفل تږک گږوه=ban غیږ فعال شُد🔒'
   else
     return '🔓leave has been unlocked🔓'
-  end
-end
-
-local function lock_group_reply(msg, data, target)
-  if not is_momod(msg) then
-    return
-  end
-  local group_reply_lock = data[tostring(target)]['settings']['reply']
-  if group_reply_lock == 'yes' then
-  local hash = 'group:'..msg.to.id
-  local group_lang = redis:hget(hash,'lang')
-  if group_lang then
-  retuen ' 🔐قُفل ریپلاے رویہ جملاټ فعاڶ بۅڊ🔒'
-  else
-    return '🔐Reply is already locked🔐'
-  end
-  end
-    data[tostring(target)]['settings']['reply'] = 'yes'
-    save_data(_config.moderation.data, data)
-    local hash = 'group:'..msg.to.id
-  local group_lang = redis:hget(hash,'lang')
-  if group_lang then
-  return '🔐قُفل ریپلاے رویہ جملاټ فعاڶ شُد🔒'
-  else
-    return '🔐Reply has been locked🔐'
-  end
-end
-
-local function unlock_group_reply(msg, data, target)
-  if not is_momod(msg) then
-    return
-  end
-  local group_reply_lock = data[tostring(target)]['settings']['reply']
-  if group_reply_lock == 'no' then
-  local hash = 'group:'..msg.to.id
-  local group_lang = redis:hget(hash,'lang')
-  if group_lang then
-  return ' 🔐قُفل ریپلاے رویہ جملاټ غیږ فعاڶ بۅڊ🔒'
-  else
-    return '🔓Reply is not locked🔓'
-  end
-  end
-    data[tostring(target)]['settings']['reply'] = 'no'
-    save_data(_config.moderation.data, data)
-    local hash = 'group:'..msg.to.id
-  local group_lang = redis:hget(hash,'lang')
-  if group_lang then
-  return ' 🔐قُفل ریپلاے رویہ جملاټ غیږ فعاڶ شُڊ🔒'
-  else
-    return '🔓Reply has been unlocked🔓'
   end
 end
 
@@ -1798,11 +1696,6 @@ function show_supergroup_settingsmod(msg, target)
 		end
 	end
 	  if data[tostring(target)]['settings'] then
-		if not data[tostring(target)]['settings']['reply'] then
-			data[tostring(target)]['settings']['reply'] = 'no'
-		end
-	end
-	  if data[tostring(target)]['settings'] then
 		if not data[tostring(target)]['settings']['join'] then
 			data[tostring(target)]['settings']['join'] = 'no'
 		end
@@ -1895,13 +1788,13 @@ function show_supergroup_settingsmod(msg, target)
 			local now = tonumber(os.time())
 			expiretime = (math.floor((tonumber(expiretime) - tonumber(now)) / 86400) + 1) .. " روز دیگر"
 		end
-local textfa = "》#تظیمات سوپرگروه:\n➖➖➖➖➖➖➖\n》#قفل لینک: [ "..settings.lock_link.." ]\n》#قفل شیرکانتکت: [ "..settings.lock_contacts.." ]\n》#قفل فلود: [ "..settings.flood.." ]\n》#حساسیت فلود: [ "..NUM_MSG_MAX.." ]\n》#قفل اسپم: [ "..settings.lock_spam.." ]\n》#قفل چت فارسی: [ "..settings.lock_arabic.." ]\n》#قفل ممبر: [ "..settings.lock_member.." ]\n》#قفل چپ به راست: [ "..settings.lock_rtl.." ]\n》#قفل سرویس تلگرام: [ "..settings.lock_tgservice.." ]\n》#قفل استیکر: [ "..settings.lock_sticker.." ]\n》#قفل هشتگ(#): [ "..settings.tag.." ]\n》#قفل چت انگلیسی: [ "..settings.english.." ]\n》#قفل ریپلای: [ "..settings.reply.." ]\n》#قفل فوروارد: [ "..settings.fwd.." ]\n》#قفل جوین بالینک: [ "..settings.join.." ]\n》#قفل یوزرنیم(@): [ "..settings.username.." ]\n》#قفل مدیا: [ "..settings.media.." ]\n》#قفل فحش: [ "..settings.fosh.." ]\n》#قفل ریجوین: [ "..settings.leave.." ]\n》#قفل ربات مخرب: [ "..bots_protection.." ]\n》#قفل تبلیغ دکمه ای :[ "..settings.inline.." ]\n》#قفل دستورات :[ "..settings.cmds.." ]\n➖➖➖➖➖➖➖\n》#فیلتر فایل صوتی: [ "..settings.lock_audio.." ]\n》#فیلتر عکس: [ "..settings.lock_photo.." ]\n》#فیلتر ویدیو: [ "..settings.lock_video.." ]\n》#فیلتر گیف: [ "..settings.lock_gif.." ]\n》#فیلتر هر فایل: [ "..settings.lock_document.." ]\n》#فیلتر متن: [ "..settings.lock_text.." ]\n》#فیلتر همه: [ "..settings.lock_muteall.." ]\n➖➖➖➖➖➖➖\n》#عمومی بودن: [ "..settings.public.." ]\n 》#تنظیمات سختگیرانه: [ "..settings.strict.." ]\n》#تاریخ انقضا: [ "..expiretime.." ]\n➖➖➖➖➖➖➖\n@Ernest_TG"
+local textfa = "》#تظیمات سوپرگروه:\n➖➖➖➖➖➖➖\n》#قفل لینک: [ "..settings.lock_link.." ]\n》#قفل شیرکانتکت: [ "..settings.lock_contacts.." ]\n》#قفل فلود: [ "..settings.flood.." ]\n》#حساسیت فلود: [ "..NUM_MSG_MAX.." ]\n》#قفل اسپم: [ "..settings.lock_spam.." ]\n》#قفل چت فارسی: [ "..settings.lock_arabic.." ]\n》#قفل ممبر: [ "..settings.lock_member.." ]\n》#قفل چپ به راست: [ "..settings.lock_rtl.." ]\n》#قفل سرویس تلگرام: [ "..settings.lock_tgservice.." ]\n》#قفل استیکر: [ "..settings.lock_sticker.." ]\n》#قفل هشتگ(#): [ "..settings.tag.." ]\n》#قفل چت انگلیسی: [ "..settings.english.." ]\n》#قفل فوروارد: [ "..settings.fwd.." ]\n》#قفل جوین بالینک: [ "..settings.join.." ]\n》#قفل یوزرنیم(@): [ "..settings.username.." ]\n》#قفل مدیا: [ "..settings.media.." ]\n》#قفل فحش: [ "..settings.fosh.." ]\n》#قفل ریجوین: [ "..settings.leave.." ]\n》#قفل ربات مخرب: [ "..bots_protection.." ]\n》#قفل تبلیغ دکمه ای :[ "..settings.inline.." ]\n》#قفل دستورات :[ "..settings.cmds.." ]\n➖➖➖➖➖➖➖\n》#فیلتر فایل صوتی: [ "..settings.lock_audio.." ]\n》#فیلتر عکس: [ "..settings.lock_photo.." ]\n》#فیلتر ویدیو: [ "..settings.lock_video.." ]\n》#فیلتر گیف: [ "..settings.lock_gif.." ]\n》#فیلتر هر فایل: [ "..settings.lock_document.." ]\n》#فیلتر متن: [ "..settings.lock_text.." ]\n》#فیلتر همه: [ "..settings.lock_muteall.." ]\n➖➖➖➖➖➖➖\n》#عمومی بودن: [ "..settings.public.." ]\n 》#تنظیمات سختگیرانه: [ "..settings.strict.." ]\n》#تاریخ انقضا: [ "..expiretime.." ]\n➖➖➖➖➖➖➖\n@Ernest_TG"
 textfa = string.gsub(textfa, 'no', '<b>خیر</b>')
   textfa = string.gsub(textfa, 'yes', '<b>بله</b>')
 		textfa = string.gsub(textfa, 'Yes', '<b>بله</b>')
 return textfa
  else
-local texten = "<b>☑SuperGroup Settings</b>\n➖➖➖➖➖➖➖\n》<b>Lock</b> #Link: "..settings.lock_link.."\n》<b>Lock</b> #Contact: "..settings.lock_contacts.."\n》<b>Lock</b> #Flood: "..settings.flood.."\n》<b>Flood</b> #Sensitivity: "..NUM_MSG_MAX.."\n》<b>Lock</b> #Spam: "..settings.lock_spam.."\n》<b>Lock</b> #Arabic: "..settings.lock_arabic.."\n》<b>Lock</b> #Member: "..settings.lock_member.."\n》<b>Lock</b> #Rtl: "..settings.lock_rtl.."\n》<b>Lock</b> #Tgservice: "..settings.lock_tgservice.."\n》<b>Lock</b> #Sticker: "..settings.lock_sticker.."\n》<b>Lock</b> #Tag: "..settings.tag.."\n》<b>Lock</b> #English: "..settings.english.."\n》<b>Lock</b> #Reply: "..settings.reply.."\n》<b>Lock</b> #Fwd: "..settings.fwd.."\n》<b>Lock</b> #Join: "..settings.join.."\n》<b>Lock</b> #Username: "..settings.username.."\n》<b>Lock</b> #Media: "..settings.media.."\n》<b>Lock</b> #Fosh: "..settings.fosh.."\n》<b>Lock</b> #Leave: "..settings.leave.."\n》<b>Lock</b> #Bots: "..bots_protection.."\n》<b>Lock</b> #Inline: "..settings.inline.."\n》<b>Lock</b> #Cmds: "..settings.cmds.."\n➖➖➖➖➖➖➖\n》<b>Mute</b> #Audio: "..settings.lock_audio.."\n》<b>Mute</b> #Photo: "..settings.lock_photo.."\n》<b>Mute</b> #Video: "..settings.lock_video.."\n》<b>Mute</b> #Gifs: "..settings.lock_gif.."\n》<b>Mute</b> #Documents: "..settings.lock_document.."\n》<b>Mute</b> #Text: "..settings.lock_text.."\n》<b>Mute</b> #All: "..settings.lock_muteall.."\n➖➖➖➖➖➖➖\n》<b>Public</b>: "..settings.public.."\n 》<b>Strict</b>: "..settings.strict.."\n➖➖➖➖➖➖➖\n@Ernest_TG"
+local texten = "<b>☑SuperGroup Settings</b>\n➖➖➖➖➖➖➖\n》<b>Lock</b> #Link: "..settings.lock_link.."\n》<b>Lock</b> #Contact: "..settings.lock_contacts.."\n》<b>Lock</b> #Flood: "..settings.flood.."\n》<b>Flood</b> #Sensitivity: "..NUM_MSG_MAX.."\n》<b>Lock</b> #Spam: "..settings.lock_spam.."\n》<b>Lock</b> #Arabic: "..settings.lock_arabic.."\n》<b>Lock</b> #Member: "..settings.lock_member.."\n》<b>Lock</b> #Rtl: "..settings.lock_rtl.."\n》<b>Lock</b> #Tgservice: "..settings.lock_tgservice.."\n》<b>Lock</b> #Sticker: "..settings.lock_sticker.."\n》<b>Lock</b> #Tag: "..settings.tag.."\n》<b>Lock</b> #English: "..settings.english.."》<b>Lock</b> #Fwd: "..settings.fwd.."\n》<b>Lock</b> #Join: "..settings.join.."\n》<b>Lock</b> #Username: "..settings.username.."\n》<b>Lock</b> #Media: "..settings.media.."\n》<b>Lock</b> #Fosh: "..settings.fosh.."\n》<b>Lock</b> #Leave: "..settings.leave.."\n》<b>Lock</b> #Bots: "..bots_protection.."\n》<b>Lock</b> #Inline: "..settings.inline.."\n》<b>Lock</b> #Cmds: "..settings.cmds.."\n➖➖➖➖➖➖➖\n》<b>Mute</b> #Audio: "..settings.lock_audio.."\n》<b>Mute</b> #Photo: "..settings.lock_photo.."\n》<b>Mute</b> #Video: "..settings.lock_video.."\n》<b>Mute</b> #Gifs: "..settings.lock_gif.."\n》<b>Mute</b> #Documents: "..settings.lock_document.."\n》<b>Mute</b> #Text: "..settings.lock_text.."\n》<b>Mute</b> #All: "..settings.lock_muteall.."\n➖➖➖➖➖➖➖\n》<b>Public</b>: "..settings.public.."\n 》<b>Strict</b>: "..settings.strict.."\n➖➖➖➖➖➖➖\n@Ernest_TG"
 texten = string.gsub(texten, 'no', '<b>UnLock</b>')
   texten = string.gsub(texten, 'yes', '<b>Lock</b>')
 		texten = string.gsub(texten, 'Yes', '<b>Lock</b>')
@@ -3045,10 +2938,6 @@ local function run(msg, matches)
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked fwd")
 				return lock_group_fwd(msg, data, target)
 			end
-			if matches[2] == 'reply' then
-				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked reply")
-				return lock_group_reply(msg, data, target)
-			end
 			if matches[2] == 'cmds' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] locked cmds")
 				return lock_group_cmds(msg, data, target)
@@ -3139,10 +3028,6 @@ local function run(msg, matches)
 			if matches[2] == 'fwd' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked fwd")
 				return unlock_group_fwd(msg, data, target)
-			end
-			if matches[2] == 'reply' then
-				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked reply")
-				return unlock_group_reply(msg, data, target)
 			end
 			if matches[2] == 'fosh' then
 				savelog(msg.to.id, name_log.." ["..msg.from.id.."] unlocked fosh")
